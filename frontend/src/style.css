@@ -1,0 +1,172 @@
+:root {
+  /* Default Light Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --bg-tertiary: #e4e4e7;
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --border-color: #e4e4e7;
+  --accent-color: #10a37f;
+  --accent-hover: #0d8a6a;
+  --input-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --bubble-sent: #10a37f;
+  --bubble-received: #f4f4f5;
+  --bubble-text-sent: #ffffff;
+  --bubble-text-received: #18181b;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color-scheme: light;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root.dark {
+  /* Dark Theme */
+  --bg-primary: #000000;
+  --bg-secondary: #09090b;
+  --bg-tertiary: #18181b;
+  --text-primary: #ececec;
+  --text-secondary: #a1a1aa;
+  --border-color: #27272a;
+  --accent-color: #10a37f;
+  --accent-hover: #0d8a6a;
+  --input-bg: #18181b;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --bubble-sent: #10a37f;
+  --bubble-received: #1f1f22;
+  --bubble-text-sent: #ffffff;
+  --bubble-text-received: #ececec;
+  --bg-glass: rgba(9, 9, 11, 0.75);
+  
+  color-scheme: dark;
+}
+
+/* Mobile Fixes */
+@media (max-width: 768px) {
+  .chat-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .sub-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .list-container, .moments-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 70px !important; /* Enough for bottom nav */
+    height: auto !important; /* Reset */
+    box-sizing: border-box;
+  }
+  .main-area {
+    padding-bottom: 70px;
+  }
+  .bottom-nav {
+    z-index: 9999 !important;
+  }
+  .moments-list-scroll {
+    padding-bottom: 50px;
+  }
+  .show-mobile {
+      display: inline-flex !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: var(--border-color); 
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary); 
+}
+
+.tool-icon {
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool-icon:hover {
+    background-color: var(--bg-hover);
+}
+
+.audio-bubble {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 5px;
+    margin-top: 5px; /* Add spacing to avoid overlapping with name/avatar */
+}
+
+.msg-audio {
+    width: 250px;
+    height: 40px;
+}
+
+/* Make bubbles relative for absolute positioning if needed */
+.bubble, .image-bubble, .video-bubble, .audio-bubble, .file-bubble {
+    position: relative;
+    /* Ensure content is clickable */
+    pointer-events: auto; 
+    z-index: 1;
+}
+
+.message-content {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Context menu positioning context */
+    pointer-events: auto; /* Ensure wrapper allows clicks */
+    cursor: default;
+}
+
+/* Ensure action trigger area doesn't block clicks on media controls */
+.action-trigger-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0; /* Lower than media content z-index */
+    /* pointer-events: none; - Removing this would disable context menu trigger on empty space */
+    /* We need clicks to pass through to media controls but right clicks to trigger context menu */
+    /* This is tricky. Let's make it not cover the media elements specifically. */
+    display: none; /* Disable the overlay approach, use direct event binding on wrapper */
+}
