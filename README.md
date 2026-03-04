@@ -2,6 +2,8 @@
 
 一个功能强大的全栈即时通讯系统，集成了私聊、群聊、朋友圈以及 AI 智能助手功能。
 
+### 要想直接体验项目，请进入网站下载
+`https://msdos-signal.github.io/xinhaoCloudChat_download/`
 ## 🌟 核心功能
 
 ### 1. 💬 即时通讯
